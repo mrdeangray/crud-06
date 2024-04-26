@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import CreateTransaction from "./components/CreateTransaction";
+import TransactionsProvider from "./context/TransactionsProvider";
+import UpdateTransaction from "./components/UpdateTransaction";
+import DeleteTransaction from "./components/DeleteTransaction";
+import Transactions from "./components/ReadTransactions";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TransactionsProvider>
+        <Routes>
+          <Route exact path="/" element={<Transactions />} />
+          <Route exact path="/create" element={<CreateTransaction />} />
+          <Route
+            exact
+            path="/update/:transaction"
+            element={<UpdateTransaction />}
+          />
+          <Route
+            exact
+            path="/delete/:transaction"
+            element={<DeleteTransaction />}
+          />
+        </Routes>
+      </TransactionsProvider>
     </div>
   );
 }
